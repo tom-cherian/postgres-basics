@@ -16,7 +16,7 @@ const addUserInDatabase = async (body) => {
     firstName: body.firstName,
     lastName: body.lastName,
     email: body.email,
-    isDeleted: false
+    isDeleted: body.isDeleted? body.isDeleted : false,
   });
 };
 
