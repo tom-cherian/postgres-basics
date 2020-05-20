@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "riya@1995",
+    "database": "User Management",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "riya@1995",
+    "database": "User Management",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "riya@1995",
+    "database": "User Management",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
