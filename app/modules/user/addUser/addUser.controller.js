@@ -4,10 +4,12 @@ const { checkExistingEmails, addUserInDatabase } = require('./addUser.query');
 const addUser = async (req, res) => {
   try {
     const validation = validationResult(req);
-    if (!validation.isEmpty()) return res.send(validation);
+    if (!validation.isEmpty()) 
+      { return res.send(validation); }
 
     const isExistingEmail = await checkExistingEmails(req.body.email);
-    if (isExistingEmail) return res.send('User Already Exists!!!');
+    if (isExistingEmail) 
+      { return res.send('User Already Exists!!!'); }
 
     const addedUser = await addUserInDatabase(req.body);
     return res.send(addedUser);
@@ -17,4 +19,4 @@ const addUser = async (req, res) => {
   }
 };
 
-module.exports = addUser;
+module.exports = {addUser};

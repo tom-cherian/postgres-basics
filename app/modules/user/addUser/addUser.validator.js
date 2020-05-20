@@ -6,4 +6,4 @@ const addUserValidator = [
     body('email').trim().isEmail().withMessage('Invalid Email!!!'),
 ];
 
-module.exports = addUserValidator;
+module.exports = { addUserValidator };

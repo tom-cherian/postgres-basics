@@ -1,11 +1,14 @@
 const { User } = require('../../../../models');
+const { Op } = require('sequelize');
 
 const deleteUserQuery = async (userId) => {
-    return User.destroy({
+    return User.update({ isDeleted: true },{
         where: {
-            id: userId.id
+            id: {
+                [Op.eq] : userId.id
+            }
         }
     });
 };
 
-module.exports = deleteUserQuery;
+module.exports = { deleteUserQuery };

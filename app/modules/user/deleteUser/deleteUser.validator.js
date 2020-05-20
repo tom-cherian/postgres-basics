@@ -1,7 +1,7 @@
 const { param } = require('express-validator');
 
 const deleteUserValidator = [
-    param('id').isInt()
+    param('id').isInt().withMessage('Enter an integer!!!')
 ];
 
-module.exports = deleteUserValidator;
+module.exports = {deleteUserValidator};

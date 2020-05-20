@@ -1,14 +1,16 @@
 const { validationResult } = require('express-validator');
-const viewUserQuery  = require('./viewUser.query');
+const {viewUserQuery}  = require('./viewUser.query');
 
 const viewUser = async (req, res) => {
   try {
     const validation = validationResult(req);
-    if (!validation.isEmpty()) return res.send(validation);
+    if (!validation.isEmpty())
+      { return res.send(validation); }
 
     const viewUser = await viewUserQuery();
 
-    if (!viewUser) return res.send('No such user found');
+    if (!viewUser)
+      { return res.send('No such user found'); }
 
     return res.send(viewUser);
   } catch (e) {
@@ -16,4 +18,4 @@ const viewUser = async (req, res) => {
   }
 };
 
-module.exports = viewUser;
+module.exports = {viewUser};

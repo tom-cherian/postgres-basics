@@ -16,4 +16,4 @@ const editUserQuery = (req) => {
     });
 };
 
-module.exports = editUserQuery;
+module.exports = {editUserQuery};
