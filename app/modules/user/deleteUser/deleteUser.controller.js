@@ -7,7 +7,7 @@ const deleteUser = async (req, res) => {
     if (!validation.isEmpty()) 
       { return res.send(validation); }
 
-    const result = await deleteUserQuery(req.params);
+    const result = await deleteUserQuery(req.params.id);
 
     if (result) 
       { return res.send('Deleted a booking'); }

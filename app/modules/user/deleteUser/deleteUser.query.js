@@ -5,7 +5,7 @@ const deleteUserQuery = async (userId) => {
     return User.update({ isDeleted: true },{
         where: {
             id: {
-                [Op.eq] : userId.id
+                [Op.eq] : userId
             }
         }
     });
