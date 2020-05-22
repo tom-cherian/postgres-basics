@@ -5,14 +5,14 @@ const deleteUser = async (req, res) => {
   try {
     let validation = validationResult(req);
     if (!validation.isEmpty()) 
-      { return res.send(validation); }
+      { res.send(validation); }
 
     const result = await deleteUserQuery(req.params.id);
 
-    if (result) 
-      { return res.send('Deleted a booking'); }
+    if (result[0] !=0 ) 
+      { res.send('Deleted a user'); }
       
-    return res.send('Booking not found');
+     res.send('User not found');
   } catch (e) {
     res.status(500).send({ message: e.message });
   }

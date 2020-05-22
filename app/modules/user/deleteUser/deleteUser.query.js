@@ -6,7 +6,8 @@ const deleteUserQuery = async (userId) => {
         where: {
             id: {
                 [Op.eq] : userId
-            }
+            },
+            isDeleted: false
         }
     });
 };
