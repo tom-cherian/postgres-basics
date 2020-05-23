@@ -6,6 +6,7 @@ const checkExistingEmails = async (email) => {
     where: {
       email: {
         [Op.iLike]: email,
+        isDeleted: false
       },
     },
   });
@@ -16,7 +17,7 @@ const addUserInDatabase = async (body) => {
     firstName: body.firstName,
     lastName: body.lastName,
     email: body.email,
-    isDeleted: body.isDeleted? body.isDeleted : false,
+    isDeleted: body.isDeleted ? body.isDeleted : false,
   });
 };
 

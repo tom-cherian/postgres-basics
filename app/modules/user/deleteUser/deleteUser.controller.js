@@ -1,21 +1,23 @@
 const { validationResult } = require('express-validator');
-const { deleteUserQuery } = require('./deleteUser.query');
+const { deleteUserQuery, checkUserQuery } = require('./deleteUser.query');
 
 const deleteUser = async (req, res) => {
   try {
     let validation = validationResult(req);
-    if (!validation.isEmpty()) 
-      { res.send(validation); }
+    if (!validation.isEmpty()) {
+      return res.status(400).send(validation);
+    }
 
-    const result = await deleteUserQuery(req.params.id);
+    const checkUserExists = await checkUserQuery(req.params.id);
+    if (!checkUserExists) {
+      return res.status(404).send('User not found');
+    }
 
-    if (result[0] !=0 ) 
-      { res.send('Deleted a user'); }
-      
-     res.send('User not found');
+    await deleteUserQuery(req.params.id);
+    return res.status(200).send('Deleted a user');
   } catch (e) {
-    res.status(500).send({ message: e.message });
+    return res.status(500).send({ message: e.message });
   }
 };
 
-module.exports = {deleteUser};
+module.exports = { deleteUser };

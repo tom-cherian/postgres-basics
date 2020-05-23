@@ -1,4 +1,4 @@
-const { Ticket } = require('../../../../models');
+const { Ticket } = require('../../.../../../../models');
 const { Op } = require('sequelize');
 
 const checkTicketQuery = (ticketId) => {
@@ -12,17 +12,21 @@ const checkTicketQuery = (ticketId) => {
   });
 };
 
-const deleteTicketQuery = async (ticketId) => {
+const editTicketQuery = (body, showTime, ticketId) => {
   return Ticket.update(
-    { isDeleted: true },
+    {
+      movieName: body.movieName,
+      showTime: showTime,
+      availableTickets: body.availableTickets,
+    },
     {
       where: {
         id: {
           [Op.eq]: ticketId,
-        }
+        },
       },
     }
   );
 };
 
-module.exports = { deleteTicketQuery, checkTicketQuery };
+module.exports = { checkTicketQuery, editTicketQuery };

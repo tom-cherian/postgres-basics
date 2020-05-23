@@ -1,8 +1,8 @@
 const { validationResult } = require('express-validator');
-const { addTicketQuery, checkMovieQuery } = require('./addTicket.query');
+const { checkTicketQuery, editTicketQuery } = require('./editTicket.query');
 const moment = require('moment');
 
-const addTicket = async (req, res) => {
+const editTicket = async (req, res) => {
   let { year, month, date, hour, minute } = req.body;
   let showTime = moment.utc({
     years: year,
@@ -17,16 +17,16 @@ const addTicket = async (req, res) => {
       return res.status(400).send(validation);
     }
 
-    const checkMovieExists = await checkMovieQuery(req.body.movieName);
-    if (checkMovieExists) {
-      return res.status(409).send('Movie already exists!!!');
+    const checkTicketExists = await checkTicketQuery(req.params.id);
+    if (!checkTicketExists) {
+      return res.status(404).send('Ticket not found');
     }
 
-    const newTicket = await addTicketQuery(req.body, showTime);
-    return res.status(200).send(newTicket);
+    await editTicketQuery(req.body, showTime, req.params.id);
+    return res.status(200).send('updated Ticket!!!');
   } catch (e) {
     return res.status(500).send({ message: e.message });
   }
 };
 
-module.exports = { addTicket };
+module.exports = { editTicket };

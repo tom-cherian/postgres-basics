@@ -4,9 +4,8 @@ const viewTickets = async (req, res) => {
   try {
     const viewTickets = await viewTicketQuery();
     return res.send(viewTickets);
-  }
-  catch(e){
-      res.status(500).send({ message: e.message});
+  } catch (e) {
+    return res.status(500).send({ message: e.message });
   }
 };
 

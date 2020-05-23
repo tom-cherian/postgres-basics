@@ -1,21 +1,23 @@
 const { validationResult } = require('express-validator');
-const { deleteTicketQuery } = require('./deleteTicket.query');
+const { deleteTicketQuery,checkTicketQuery } = require('./deleteTicket.query');
 
 const deleteTicket = async (req, res) => {
   try {
     const validation = await validationResult(req);
     if (!validation.isEmpty()) {
-      return res.send(validation);
+      return res.status(400).send(validation);
     }
 
-    const result = await deleteTicketQuery(req.params.id);
-    console.log(result);
-    if (result[0] !=0 ) {
-      return res.send('Deleted a ticket');
+    const checkTicketExists = await checkTicketQuery(req.params.id);
+    if (!checkTicketExists) {
+      return res.status(404).send('Ticket not found');
     }
-    res.send('Ticket not found');
+
+    await deleteTicketQuery(req.params.id);
+    return res.status(200).send('Deleted a ticket');
+
   } catch (e) {
-    res.status(500).send({ message: e.message });
+    return res.status(500).send({ message: e.message });
   }
 };
 
