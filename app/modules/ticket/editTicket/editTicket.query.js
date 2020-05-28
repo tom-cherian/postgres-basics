@@ -17,7 +17,7 @@ const editTicketQuery = (body, showTime, ticketId) => {
     {
       movieName: body.movieName,
       showTime: showTime,
-      availableTickets: body.availableTickets,
+      available_tickets: body.available_tickets,
     },
     {
       where: {
