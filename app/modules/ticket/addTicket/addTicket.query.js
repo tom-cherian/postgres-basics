@@ -1,6 +1,6 @@
 const { Ticket } = require('../../../../models');
 
-const checkMovieQuery = (movieName) => {
+const checkMovieQuery = async (movieName) => {
     return Ticket.count({
         where: {
             movieName: movieName,
@@ -13,7 +13,7 @@ const addTicketQuery = async (body,showTime) => {
     return Ticket.create({
         movieName: body.movieName,
         showTime: showTime,
-        availableTickets: body.availableTickets,
+        available_tickets: body.availableTickets,
         isDeleted: body.isDeleted? body.isDeleted : false
     });
 };

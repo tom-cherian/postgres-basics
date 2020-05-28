@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     isDeleted: DataTypes.BOOLEAN
   }, {});
   Booking.associate = function(models) {
-    // associations can be defined here
+    this.belongsTo(models.User,{
+      foriegnKey: 'userId'
+    });
+    this.belongsTo(models.Ticket,{
+      foriegnKey: 'ticketId'
+    });
   };
   return Booking;
 };

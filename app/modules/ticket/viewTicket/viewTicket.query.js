@@ -1,6 +1,6 @@
 const { Ticket } = require('../../../../models');
 
-const viewTicketQuery = () => {
+const viewTicketQuery = async() => {
   return Ticket.findAll({
     where: {
       isDeleted: false,
